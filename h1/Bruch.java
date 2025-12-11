@@ -42,8 +42,10 @@ public class Bruch {
      */
     public void shorten() {
         int bufferGGT = ggT(nenner, zaehler);
-        nenner = nenner/bufferGGT;
-        zaehler = zaehler/bufferGGT;
+        if(bufferGGT!=0) {
+            nenner = nenner/bufferGGT;
+            zaehler = zaehler/bufferGGT;
+        }
     }
 
     /*
@@ -52,8 +54,12 @@ public class Bruch {
     public boolean hasSameValueAs(Bruch b) {
         int thisGGT = ggT(this.nenner, this.zaehler);
         int bGGT = ggT(b.nenner, b.zaehler);
-        if(this.nenner/thisGGT == b.nenner/bGGT && this.zaehler/thisGGT == b.zaehler/bGGT)
+        if(this.zaehler!=0 && b.nenner!=0) {
+            if (this.nenner==0 && b.nenner==0)
                 return true;
+            if(this.nenner/thisGGT == b.nenner/bGGT && this.zaehler/thisGGT == b.zaehler/bGGT)
+                return true;
+        }
         return false;
     }
 }
