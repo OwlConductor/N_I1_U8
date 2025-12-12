@@ -10,30 +10,32 @@ public class Bruch {
     }
 
     /*
-     * Berechnen des größten gemeinsamen Teiles
+     * Berechnen des größten gemeinsamen Teilers
      */
     private int ggT(int x, int y) {
 
-        // ggT existiert nicht für Bruch mit 0 und gtr 0 zwecks euklidischem Algorithmus
-        if(x<=0 || y<=0)
+        // ggT für 0 und 0 ist 0
+        if(x==0 && y==0)
             return 0;
-        
-        // x wird zur größeren Zahl
+
+        // ggT für negative Zahlen ist positiv definiert
+        // so können x,y für den Algorithmus auch positiv sein
+        x = Math.abs(x);
+        y = Math.abs(y);
+
+        // ggt für 0 und eine Zahl ist der Betrag der Zahl.
+        if(x==0)
+            return y;
+        if(y==0)
+            return x;
+
+        // ggT mit euklidischer Algorithmus
         int bufferNumber;
-        if (x<y) {
-            bufferNumber = x;
-            x = y;
-            y = bufferNumber;
-        }
-        
-        // euklidischer Algorithmus
         while (x%y!=0) {
             bufferNumber = y;
             y = x%y;
             x = bufferNumber;
         }
-
-        // y ist ggT
         return y;
     }
 
@@ -42,6 +44,9 @@ public class Bruch {
      */
     public void shorten() {
         int bufferGGT = ggT(nenner, zaehler);
+        if(this.nenner==0)
+            this.zaehler = 1;
+
         if(bufferGGT!=0) {
             nenner = nenner/bufferGGT;
             zaehler = zaehler/bufferGGT;
@@ -50,6 +55,7 @@ public class Bruch {
 
     /*
      * Die gekürzten Brüche werden auf Gleichheit überprüft.
+     * Die Brüche werden nicht gekürzt, da nicht von Aufgabe verlangt.
      */
     public boolean hasSameValueAs(Bruch b) {
         int thisGGT = ggT(this.nenner, this.zaehler);
