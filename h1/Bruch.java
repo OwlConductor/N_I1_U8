@@ -60,8 +60,8 @@ public class Bruch {
     public boolean hasSameValueAs(Bruch b) {
         int thisGGT = ggT(this.nenner, this.zaehler);
         int bGGT = ggT(b.nenner, b.zaehler);
-        if(this.zaehler!=0 && b.nenner!=0) {
-            if (this.nenner==0 && b.nenner==0)
+        if(this.nenner!=0 && b.nenner!=0) {
+            if (this.zaehler==0 && b.zaehler==0)
                 return true;
             if(this.nenner/thisGGT == b.nenner/bGGT && this.zaehler/thisGGT == b.zaehler/bGGT)
                 return true;
